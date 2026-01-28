@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BAT IREEDUI KHUC | Лифтний компани</title>
+
+<style>
+:root{
+  --bg-dark:#0f172a;
+  --bg-section:#111827;
+  --primary:#3b82f6;
+  --text-main:#e5e7eb;
+  --text-soft:#9ca3af;
+  --white:#ffffff;
+}
+
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  background:linear-gradient(180deg,#0f172a,#020617);
+  color:var(--text-main);
+  line-height:1.7;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#ffffffdd,#e5e7ebcc);
+  backdrop-filter:blur(8px);
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  transition:all 0.3s ease;
+}
+
+/* Mobile menu button */
+.menu-btn{
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#1e293b;
+  transition: color 0.3s ease;
+}
+.menu-btn:hover{
+  color:var(--primary);
+}
+
+/* LOGO + TEXT */
+.logo-link{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  transition: transform 0.3s ease;
+}
+.logo-link:hover{
+  transform:scale(1.03);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.logo img{
+  height:40px; /* жижиглэв */
+  border-radius:6px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+.logo-link:hover img{
+  transform:scale(1.02);
+}
+
+.logo span{
+  font-size:18px; /* жижиглэв */
+  font-weight:900;
+  color:#1e3a8a;
+  letter-spacing:1px;
+  text-shadow:0 1px 3px rgba(0,0,0,0.25);
+  transition: color 0.3s ease;
+}
+.logo-link:hover span{
+  color:var(--primary);
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.55);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:999;
+}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* SIDE MENU */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:260px;
+  height:100vh;
+  background:var(--white);
+  color:#111;
+  padding:20px 20px;
+  transition:.35s ease;
+  z-index:1000;
+  box-shadow:4px 0 15px rgba(0,0,0,0.15);
+}
+.side-menu.active{left:0}
+
+.close-btn{
+  font-size:20px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  margin-bottom:20px;
+  transition: color 0.3s ease;
+}
+.close-btn:hover{
+  color:var(--primary);
+}
+
+.side-menu a{
+  display:block;
+  padding:12px 0;
+  text-decoration:none;
+  color:#1f2937;
+  font-weight:600;
+  border-bottom:1px solid #e5e7eb;
+  transition: color 0.3s ease;
+}
+.side-menu a:hover{
+  color:var(--primary);
+}
+
+/* MAIN */
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 16px;
+}
+
+/* HERO */
+.hero{
+  padding:60px 20px;
+  margin-bottom:40px;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  color:#dbeafe;
+  text-align:center;
+}
+.hero h1{
+  font-size:28px;
+  margin-bottom:16px;
+  text-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+.hero p{
+  max-width:600px;
+  margin:auto;
+  font-size:16px;
+  line-height:1.5;
+}
+
+/* SECTION */
+section{
+  background:var(--bg-section);
+  padding:30px 20px;
+  border-radius:16px;
+  margin-bottom:30px;
+  box-shadow:0 15px 30px rgba(0,0,0,.25);
+}
+
+section h2{
+  font-size:24px;
+  margin-bottom:16px;
+  color:#ffffff;
+}
+
+section p{
+  color:var(--text-soft);
+  font-size:16px;
+  line-height:1.5;
+}
+
+/* SERVICE LIST */
+.service-list{
+  list-style:none;
+  padding-left:0;
+  color:var(--text-soft);
+  font-size:16px;
+  line-height:1.6;
+}
+
+.service-list li{
+  background:rgba(59,130,246,0.1);
+  margin-bottom:10px;
+  padding:10px 14px;
+  border-radius:10px;
+  transition:all 0.3s ease;
+}
+
+.service-list li:hover{
+  background:rgba(59,130,246,0.2);
+  transform:translateX(3px);
+}
+
+/* DESKTOP */
+@media(min-width:768px){
+  .menu-btn{display:none}
+  .overlay{display:none}
+
+  nav.side-menu{
+    position:static;
+    height:auto;
+    width:auto;
+    display:flex;
+    gap:26px;
+    background:none;
+    padding:0;
+  }
+
+  nav.side-menu a{
+    border:none;
+    color:#1e293b;
+    padding:0;
+  }
+  .close-btn{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="menu-btn" onclick="openMenu()">☰</button>
+
+  <a href="index.html" class="logo-link">
+    <div class="logo">
+      <img src="unnamed.jpg" alt="BAT IREEDUI KHUC">
+      <span>БАТ ИРЭЭДҮЙ ХҮЧ</span>
+    </div>
+  </a>
+
+  <nav class="side-menu" id="menu">
+    <button class="close-btn" onclick="closeMenu()">✕</button>
+    <a href="index.html">Бидний тухай</a>
+    <a href="buteegdhuun.html">Бүтээгдэхүүн</a>
+    <a href="holboo.html">Холбоо барих</a>
+  </nav>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<main>
+  <div class="hero">
+    <h1>Аюулгүй • Найдвартай • Орчин үеийн лифт</h1>
+    <p>Бид таны барилга, орон сууцны лифтний угсралт, засвар үйлчилгээ, нийлүүлэлтийг хариуцна. Шинэ лифт захиалга, засвар үйлчилгээний бүх асуудлыг нэг дор шийднэ.</p>
+  </div>
+
+  <section id="about">
+    <h2>Бидний тухай</h2>
+    <p>
+       Бат Ирээдүй Хүч ХХК- нь Улаанбаатар хот болон хөдөө орон нутагт лифт угсралт болон засвар үйлчилгээ, лифт нийлүүлэлтийн чиглэлээр үйл ажиллагаа явуулж байна. Манай засвар үйлчилгээний механикууд, угсралтын баригадууд таны барилгын лифтний угсралт, засвар үйлчилгээг хийхэд хэзээд бэлэн байх болно. Мөн шинээр лифт захиалах бол манай компани урт настай, эдэлгээ сайтай, сайн чанарын лифтыг зах зээлийн үнээс хямд нийлүүлж, угсарч байна. Манай мэргэшсэн лифт захиалгын мэргэжилтэн таньд үйлчилхэд хэзээд бэлэн байна. 
+    </p>
+    <br>
+    <div style="text-align: center;">
+  <img src="ph20.jpg" style="height: 150px; width: 200px;">
+  <img src="ph21.jpg" style="height: 150px; width: 200px;">
+</div>
+  </section>
+  <section id="services">
+  <h2>Манай үйлчилгээ</h2>
+  <ul class="service-list">
+    <li>💠 Лифтний техник үйлчилгээ</li>
+    <li>💠 Лифтний засвар</li>
+    <li>💠 Лифтний магадлан</li>
+    <li>💠 Лифтний угсралт, суурилуулалт, нийлүүлэлт</li>
+    <li>💠 Лифтний сар бүрийн үзлэг, оношлогоо</li>
+    <li>💠 Лифтний зөвлөмж гэх мэтчилэн хамтран ажилладаг.</li>
+  </ul>
+</section>
+
+   <div style="text-align: center;">
+    <p>&copy; Бат Ирээдүй Хүч ХХК.</p>
+</div>
+</main>
+
+<script>
+const menu = document.getElementById('menu');
+const overlay = document.getElementById('overlay');
+
+function openMenu(){
+  menu.classList.add('active');
+  overlay.classList.add('active');
+}
+function closeMenu(){
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+}
+</script>
+
+</body>
+</html>

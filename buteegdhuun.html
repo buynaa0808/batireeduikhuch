@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAT IREEDUI KHUC | Лифтний компани</title>
+
+<style>
+  p {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: justify;
+}
+
+:root{
+  --bg-dark:#0f172a;
+  --bg-section:#111827;
+  --primary:#3b82f6;
+  --text-main:#e5e7eb;
+  --text-soft:#9ca3af;
+  --overlay:rgba(0,0,0,.5);
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  background:linear-gradient(180deg,#0f172a,#020617);
+  color:var(--text-main);
+  line-height:1.7;
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(90deg,#ffffffee,#e5e7ebdd);
+  backdrop-filter:blur(8px);
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.topbar{
+  max-width:1200px;
+  margin:auto;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo img{
+  height:42px;
+  border-radius:6px;
+}
+.logo span{
+  font-size:18px;
+  font-weight:900;
+  color:#1e3a8a;
+  letter-spacing:1px;
+}
+
+/* DESKTOP NAV */
+nav{
+  display:flex;
+  gap:28px;
+}
+nav a{
+  text-decoration:none;
+  font-weight:600;
+  color:#1e293b;
+  position:relative;
+}
+nav a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background:var(--primary);
+  transition:.3s;
+}
+nav a:hover::after{width:100%}
+
+/* ☰ BUTTON */
+.menu-btn{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+/* ===== SLIDE MENU ===== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:var(--overlay);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:260px;
+  height:100%;
+  background:#fff;
+  padding:20px;
+  transition:.3s;
+  z-index:2000;
+}
+.side-menu.active{left:0}
+.side-menu .close{
+  font-size:22px;
+  cursor:pointer;
+  margin-bottom:30px;
+  display:inline-block;
+  color:#000;
+  transition:color 0.3s;
+}
+.side-menu a{
+  display:block;
+  padding:14px 0;
+  color:#1f2937;
+  text-decoration:none;
+  font-size:16px;
+}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 16px;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  border-radius:16px;
+  padding:60px 20px;
+  margin-bottom:40px;
+  text-align:center;
+}
+.hero h1{font-size:28px;margin-bottom:16px;color:#dbeafe}
+.hero p{max-width:600px;margin:auto;color:#e0e7ff}
+
+/* SECTION */
+section{
+  background:var(--bg-section);
+  padding:30px 20px;
+  border-radius:16px;
+  margin-bottom:30px;
+}
+section h2{font-size:24px;margin-bottom:16px}
+section p{color:var(--text-soft)}
+
+/* PRODUCTS */
+.product-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* desktop-д 2 багана */
+  gap:24px;
+  margin-top:20px;
+}
+.product-card{
+  font-size: 13px;
+  background:linear-gradient(180deg,#020617,#111827);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  transition:transform 0.3s;
+}
+.product-card:hover{
+  transform:translateY(-5px);
+}
+.product-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-bottom:2px solid #2563eb;
+}
+.product-card h3{
+  padding:14px 16px 16px;
+  color:var(--text-soft);
+  font-weight:500;
+  line-height:1.5;
+}
+
+/* MOBILE-д 2 багана хэвээр */
+@media(max-width:768px){
+  .product-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .product-card img{
+    height:180px;
+  }
+}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;color:var(--text-soft)}
+
+/* RESPONSIVE NAV */
+@media(max-width:768px){
+  nav{display:none}
+  .menu-btn{display:block}
+}
+.menu-btn:hover {color:#444;}
+/* CENTER TEXT */ .center-text{ max-width:800px; margin:30px auto 0; padding:0 16px; text-align:justify; color:white }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="topbar">
+    <button class="menu-btn" onclick="openMenu()">☰</button>
+    <div class="logo">
+      <img src="unnamed.jpg" alt="Лого">
+      <span>БАТ ИРЭЭДҮЙ ХҮЧ</span>
+    </div>
+    <nav>
+      <a href="index.html">Бидний тухай</a>
+      <a href="buteegdhuun.html">Бүтээгдэхүүн</a>
+      <a href="holboo.html">Холбоо барих</a>
+    </nav>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="side-menu" id="menu">
+  <span class="close" onclick="closeMenu()">✕</span>
+  <a href="index.html">Бидний тухай</a>
+  <a href="#products">Бүтээгдэхүүн</a>
+  <a href="holboo.html">Холбоо барих</a>
+</div>
+
+<main>
+<section id="products">
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="ph1.jpg" alt="Зорчигчийн лифт">
+      <h3>Зорчигчийн лифт нь зорчигчдыг аюулгүй, хурдтайгаар хүссэн давхарт хүргэж өгнө. Чимээгүй ажиллагаа нь шөнийн цагт таныг амар тайван амрахад чухал нөлөөтэй.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph2.jpg" alt="Эмнэлэгийн лифт">
+      <h3>Эмнэлэгийн лифтний багтаамж том, өргөн хаалгатай тул ор болон эмнэлэгийн тоног төхөөрөмж зөөхөд төвөггүй. Давхрын босгыг оновчтой олж зогсох тул тохиромжтой.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph3.jpg" alt="Ачааны лифт">
+      <h3>Ачааны лифтний том кабин, өргөн хаалга, бөх рам нь үйлдвэр, агуулах, худалдааны төвд тохиромжтой.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph4.jpg" alt="Мэдрэгч">
+      <h3>Панаромик лифт нь саруул зайд хүрээлэн буй орчноо харахад зориулагдсан. Таны барилгын чимэг болсон төхөөрөмж юм. Зочид буудал, оффис, худалдааны төвүүдэд ихэвчлэн хэрэглэж байна.</h3>
+    </div>
+  </div>
+  <p class="center-text">
+    Олон улсад түгээмэл хэрэглэгддэг NICE 3000 удирдлагын
+    системтэй сайн чанарын лифтийг нийлүүлэгч компани юм.
+  </p>
+  <section id="products">
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="ph5.jpg" alt="Зорчигчийн лифт">
+      <h3>Гэрийн лифтний тусламжтай өөрийн төсөөллийг бодит болго. Таны гэрийн аль ч зайд тохирсон олон шийдлүүд бий.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph6.jpg" alt="Эмнэлэгийн лифт">
+      <h3>Удаан хугацаанд найдвартай ажиллах, бат бөх урсдаг шат нь музей, галт тэрэгний буудал, худаллааны төвүүдийн чухал хэрэгцээ юм.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph7.jpg" alt="Ачааны лифт">
+      <h3>Жижиг техникийн өрөөтэй зорчигчийн лифтний харагдах байдал.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph8.jpg" alt="Мэдрэгч">
+      <h3>Зүүн гарт талд техникийн өрөөтэй,баруун гар талд техникийн өрөөгүй зорчигчийн лифт байна.</h3>
+    </div>
+  </div>
+  <section id="products">
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="ph9.jpg" alt="Зорчигчийн лифт">
+      <h3>Дээрх тормоз нь моторын эргэлтийг ямар ч алаадгүй оновчтой зогсоодгоороо давуу талтай</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph10.jpg" alt="Эмнэлэгийн лифт">
+      <h3>Хаалга нээж хаах цоожлогч нь удаан эдэлгээтэй, орчин үеийн технологийн шийдэлтэй.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph11.jpg" alt="Ачааны лифт">
+      <h3>Энэхүү хамгаалах хэрэгслийг рамны доор байрлуулахад тохиромжтой. Лифтний хурд хэт ихсэх тохиолдолд  ажиллаж чиглүүлэгч замнаас зуурч лифтэнд байгаа зорчигчдыг аюулаас хамгаална.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph12.jpg" alt="Мэдрэгч">
+      <h3>Дээрх төхөөрмөж нь лифтэнд даац хэтэрсэн үед ажиллаж эхэлдэг бөгөөд сигнал өгөн лифтний хаалгыг онгорхой байлгаж байдаг.</h3>
+    </div>
+  </div>
+</section>
+<section id="products">
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="ph13.jpg" alt="Зорчигчийн лифт">
+      <h3>Ослын үед доош чиглэсэн хүчийг сааруулж лифтэнд байгаа зорчигчийг хамгаалах зорилоготой хонгил дотор суулгаж өгдөг.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph14.jpg" alt="Эмнэлэгийн лифт">
+      <h3>Тогтоож өгсөн хурднаас хэт их хурдлах үед лифтний хамгаалах хэрэгслийг татаж ажиллалуулах төхөөрөмж.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph15.jpg" alt="Ачааны лифт">
+      <h3>Лифтийг тогтоож өгсөн зайнд аюулгүй ажиллалуулах төгсгөлийн унтраалга.</h3>
+    </div>
+    <div class="product-card">
+      <img src="ph16.jpg" alt="Мэдрэгч">
+      <h3>Хаалга хаагдах үед хүн болон ачаа хавчуулагдхаас сэргийлж лифтний хаалганд суулгаж бэхэлдэг.  </h3>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Бат Ирээдүй Хүч ХХК</footer>
+
+<script>
+function openMenu(){
+  menu.classList.add('active');
+  overlay.classList.add('active');
+}
+function closeMenu(){
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+}
+</script>
+
+</body>
+</html>
