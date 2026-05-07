@@ -1,322 +1,396 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-<meta charset="UTF-8" />
-<meta name="google-site-verification" content="W6DLFtkmc6oenv-mdttcfvKYLCHYiprxdQA9AiVxxNo" />
-<title>BAT IREEDUI KHUC | Лифтний компани</title>
-
-<style>
-:root{
-  --bg-dark:#0f172a;
-  --bg-section:#111827;
-  --primary:#3b82f6;
-  --text-main:#e5e7eb;
-  --text-soft:#9ca3af;
-  --white:#ffffff;
-}
-
-/* Reset */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-
-body{
-  background:linear-gradient(180deg,#0f172a,#020617);
-  color:var(--text-main);
-  line-height:1.7;
-}
-
-/* HEADER */
-header{
-  background:linear-gradient(90deg,#ffffffdd,#e5e7ebcc);
-  backdrop-filter:blur(8px);
-  padding:10px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 6px 20px rgba(0,0,0,0.25);
-  transition:all 0.3s ease;
-}
-
-/* Mobile menu button */
-.menu-btn{
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:#1e293b;
-  transition: color 0.3s ease;
-}
-.menu-btn:hover{
-  color:var(--primary);
-}
-
-/* LOGO + TEXT */
-.logo-link{
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  transition: transform 0.3s ease;
-}
-.logo-link:hover{
-  transform:scale(1.03);
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.logo img{
-  height:40px; /* жижиглэв */
-  border-radius:6px;
-  box-shadow:0 4px 8px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
-}
-.logo-link:hover img{
-  transform:scale(1.02);
-}
-
-.logo span{
-  font-size:18px; /* жижиглэв */
-  font-weight:900;
-  color:#1e3a8a;
-  letter-spacing:1px;
-  text-shadow:0 1px 3px rgba(0,0,0,0.25);
-  transition: color 0.3s ease;
-}
-.logo-link:hover span{
-  color:var(--primary);
-}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(2,6,23,.55);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:999;
-}
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* SIDE MENU */
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-280px;
-  width:260px;
-  height:100vh;
-  background:var(--white);
-  color:#111;
-  padding:20px 20px;
-  transition:.35s ease;
-  z-index:1000;
-  box-shadow:4px 0 15px rgba(0,0,0,0.15);
-}
-.side-menu.active{left:0}
-
-.close-btn{
-  font-size:20px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  margin-bottom:20px;
-  transition: color 0.3s ease;
-}
-.close-btn:hover{
-  color:var(--primary);
-}
-
-.side-menu a{
-  display:block;
-  padding:12px 0;
-  text-decoration:none;
-  color:#1f2937;
-  font-weight:600;
-  border-bottom:1px solid #e5e7eb;
-  transition: color 0.3s ease;
-}
-.side-menu a:hover{
-  color:var(--primary);
-}
-
-/* MAIN */
-main{
-  max-width:1100px;
-  margin:auto;
-  padding:60px 16px;
-}
-
-/* HERO */
-.hero{
-  padding:60px 20px;
-  margin-bottom:40px;
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
-  border-radius:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  color:#dbeafe;
-  text-align:center;
-}
-.hero h1{
-  font-size:28px;
-  margin-bottom:16px;
-  text-shadow:0 2px 4px rgba(0,0,0,0.3);
-}
-.hero p{
-  max-width:600px;
-  margin:auto;
-  font-size:16px;
-  line-height:1.5;
-}
-
-/* SECTION */
-section{
-  background:var(--bg-section);
-  padding:30px 20px;
-  border-radius:16px;
-  margin-bottom:30px;
-  box-shadow:0 15px 30px rgba(0,0,0,.25);
-}
-
-section h2{
-  font-size:24px;
-  margin-bottom:16px;
-  color:#ffffff;
-}
-
-section p{
-  color:var(--text-soft);
-  font-size:16px;
-  line-height:1.5;
-}
-
-/* SERVICE LIST */
-.service-list{
-  list-style:none;
-  padding-left:0;
-  color:var(--text-soft);
-  font-size:16px;
-  line-height:1.6;
-}
-
-.service-list li{
-  background:rgba(59,130,246,0.1);
-  margin-bottom:10px;
-  padding:10px 14px;
-  border-radius:10px;
-  transition:all 0.3s ease;
-}
-
-.service-list li:hover{
-  background:rgba(59,130,246,0.2);
-  transform:translateX(3px);
-}
-
-/* DESKTOP */
-@media(min-width:768px){
-  .menu-btn{display:none}
-  .overlay{display:none}
-
-  nav.side-menu{
-    position:static;
-    height:auto;
-    width:auto;
-    display:flex;
-    gap:26px;
-    background:none;
-    padding:0;
-  }
-
-  nav.side-menu a{
-    border:none;
-    color:#1e293b;
-    padding:0;
-  }
-  .close-btn{display:none}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="W6DLFtkmc6oenv-mdttcfvKYLCHYiprxdQA9AiVxxNo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAT IREEDUI KHUC | Лифтний компани</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Sans+Mono:wght@400;700&amp;display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            border-radius: 3px;
+        }
+        
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+    </style>
 </head>
+<body class="bg-slate-950 text-slate-200">
+    <!-- HEADER -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-x-3 group">
+                    <div class="relative">
+                        <img src="unnamed.jpg" alt="BAT IREEDUI KHUC" 
+                             class="h-12 w-12 object-contain rounded-xl shadow-md group-hover:scale-105 transition-transform">
+                    </div>
+                    <div>
+                        <span class="font-black text-3xl tracking-tighter text-slate-900">БАТ ИРЭЭДҮЙ</span>
+                        <span class="block text-[10px] font-bold text-blue-600 -mt-1 tracking-[3px]">ХҮЧ ХХК</span>
+                    </div>
+                </a>
 
-<body>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-x-9 text-sm font-semibold">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-blue-600">Бидний тухай</a>
+                    <a href="buteegdhuun.html" class="nav-link text-slate-700 hover:text-blue-600">Бүтээгдэхүүн</a>
+                    <a href="holboo.html" class="nav-link text-slate-700 hover:text-blue-600">Холбоо барих</a>
+                </nav>
 
-<header>
-  <button class="menu-btn" onclick="openMenu()">☰</button>
+                <!-- Desktop CTA -->
+                <div class="hidden md:block">
+                    <a href="holboo.html" 
+                       class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-2xl transition-all flex items-center gap-x-2 shadow-lg shadow-blue-500/30">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Захиалах</span>
+                    </a>
+                </div>
 
-  <a href="index.html" class="logo-link">
-    <div class="logo">
-      <img src="unnamed.jpg" alt="BAT IREEDUI KHUC">
-      <span>БАТ ИРЭЭДҮЙ ХҮЧ</span>
+                <!-- Mobile Burger -->
+                <button onclick="openMenu()" 
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-3xl text-slate-700 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-[100] hidden">
+        <!-- Overlay -->
+        <div onclick="closeMenu()" class="absolute inset-0 bg-black/70"></div>
+        
+        <!-- Drawer -->
+        <div onclick="event.stopImmediatePropagation()" 
+             class="absolute top-0 left-0 w-80 h-full bg-white shadow-2xl p-6 flex flex-col">
+            
+            <div class="flex justify-between items-center mb-10">
+                <div class="flex items-center gap-x-3">
+                    <img src="unnamed.jpg" alt="Logo" class="h-10 w-10 rounded-xl">
+                    <span class="font-black text-2xl text-slate-900">БАТ ИРЭЭДҮЙ ХҮЧ</span>
+                </div>
+                <button onclick="closeMenu()" class="text-3xl text-slate-400 hover:text-red-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex flex-col gap-y-1 text-lg font-semibold">
+                <a href="index.html" class="py-4 px-5 rounded-2xl hover:bg-slate-100 text-slate-700 flex items-center gap-x-3">
+                    <i class="fas fa-info-circle w-5"></i> <span>Бидний тухай</span>
+                </a>
+                <a href="buteegdhuun.html" class="py-4 px-5 rounded-2xl hover:bg-slate-100 text-slate-700 flex items-center gap-x-3">
+                    <i class="fas fa-box w-5"></i> <span>Бүтээгдэхүүн</span>
+                </a>
+                <a href="holboo.html" class="py-4 px-5 rounded-2xl hover:bg-slate-100 text-slate-700 flex items-center gap-x-3">
+                    <i class="fas fa-phone w-5"></i> <span>Холбоо барих</span>
+                </a>
+            </div>
+            
+            <div class="mt-auto pt-8 border-t">
+                <a href="holboo.html" 
+                   class="w-full flex justify-center items-center gap-x-3 bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-2xl font-bold text-lg shadow-lg">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Лифт захиалах</span>
+                </a>
+            </div>
+        </div>
     </div>
-  </a>
 
-  <nav class="side-menu" id="menu">
-    <button class="close-btn" onclick="closeMenu()">✕</button>
-    <a href="index.html">Бидний тухай</a>
-    <a href="buteegdhuun.html">Бүтээгдэхүүн</a>
-    <a href="holboo.html">Холбоо барих</a>
-  </nav>
-</header>
+    <!-- HERO -->
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-16">
+        <div class="hero-bg rounded-[3rem] px-10 md:px-16 py-20 text-white relative overflow-hidden">
+            <div class="max-w-3xl relative z-10">
+                <div class="inline-flex items-center gap-x-2 bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full mb-6">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span>Улаанбаатар + Орон нутаг</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-black leading-[1.05] tracking-tighter mb-6">
+                    АЮУЛГҮЙ.<br>
+                    НАЙДВАРТАЙ.<br>
+                    <span class="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">ОРЧИН ҮЕИЙН</span>
+                </h1>
+                
+                <p class="max-w-lg text-xl text-blue-100 mb-10">
+                    Таны барилгад найдвартай, орчин үеийн лифт угсарч, засварлаж, нийлүүлнэ.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="holboo.html" 
+                       class="inline-flex items-center justify-center gap-x-3 bg-white hover:bg-blue-50 text-blue-900 font-bold px-10 py-4 rounded-3xl text-lg transition-all active:scale-[0.985]">
+                        <span>Лифт захиалах</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="#services" 
+                       class="inline-flex items-center justify-center gap-x-3 border border-white/40 hover:bg-white/10 text-white font-semibold px-8 py-4 rounded-3xl text-lg transition-all">
+                        Үйлчилгээ үзэх
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-white/10 rounded-full"></div>
+            <div class="absolute -top-10 -right-20 w-96 h-96 border border-white/20 rounded-full"></div>
+        </div>
+    </div>
 
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+    <!-- ABOUT -->
+    <div id="about" class="max-w-7xl mx-auto px-6 pb-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Text -->
+            <div>
+                <div class="inline-block px-5 py-1.5 bg-blue-600/10 text-blue-400 text-xs font-bold tracking-widest rounded-full mb-4">БИДНИЙ ТУХАЙ</div>
+                
+                <h2 class="section-title text-4xl font-black text-white mb-6">Бат Ирээдүй Хүч ХХК</h2>
+                
+                <div class="text-lg text-slate-300 leading-relaxed space-y-4">
+                    <p>Бид Улаанбаатар хот болон орон нутагт лифт угсралт, засвар үйлчилгээ, нийлүүлэлтийн чиглэлээр ажилладаг.</p>
+                    <p>Манай мэргэшсэн бригад, механикууд таны барилгын лифтний бүх асуудлыг шийдвэрлэхэд бэлэн байна. Шинэ лифт захиалах бол урт настай, чанартай лифтийг зах зээлийн үнээс хямдаар нийлүүлж, угсарч өгнө.</p>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-x-4">
+                    <div class="flex -space-x-2">
+                        <div class="w-9 h-9 bg-blue-600 rounded-full border-2 border-slate-950 flex items-center justify-center text-xs font-bold">Б</div>
+                        <div class="w-9 h-9 bg-emerald-600 rounded-full border-2 border-slate-950 flex items-center justify-center text-xs font-bold">И</div>
+                        <div class="w-9 h-9 bg-violet-600 rounded-full border-2 border-slate-950 flex items-center justify-center text-xs font-bold">Х</div>
+                    </div>
+                    <div class="text-sm text-slate-400">10+ жилийн туршлага • 300+ төсөл</div>
+                </div>
+            </div>
+            
+            <!-- Images -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="relative group">
+                    <img src="ph20.jpg" alt="Лифт 1" 
+                         class="rounded-3xl shadow-2xl w-full aspect-[4/3] object-cover group-hover:scale-[1.02] transition-transform">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl"></div>
+                </div>
+                <div class="relative group mt-8">
+                    <img src="ph21.jpg" alt="Лифт 2" 
+                         class="rounded-3xl shadow-2xl w-full aspect-[4/3] object-cover group-hover:scale-[1.02] transition-transform">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
-<main>
-  <div class="hero">
-    <h1>Аюулгүй • Найдвартай • Орчин үеийн лифт</h1>
-    <p>Бид таны барилга, орон сууцны лифтний угсралт, засвар үйлчилгээ, нийлүүлэлтийг хариуцна. Шинэ лифт захиалга, засвар үйлчилгээний бүх асуудлыг нэг дор шийднэ.</p>
-  </div>
+    <!-- SERVICES -->
+    <div id="services" class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="text-center mb-12">
+            <div class="inline-block px-5 py-1.5 bg-blue-600/10 text-blue-400 text-xs font-bold tracking-widest rounded-full mb-3">МАН
+АЙ ҮЙЛЧИЛГЭЭ</div>
+            <h2 class="text-4xl font-black text-white">Бид юу хийдэг вэ?</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Service Cards -->
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-tools text-blue-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Лифтний техник үйлчилгээ</h3>
+                <p class="text-slate-400">Сар бүрийн үзлэг, оношлогоо, тослох, цэвэрлэгээ</p>
+            </div>
+            
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-emerald-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-wrench text-emerald-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Лифтний засвар</h3>
+                <p class="text-slate-400">Бүх төрлийн эвдрэл, гэмтлийг хурдан шуурхай засварлана</p>
+            </div>
+            
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-violet-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-clipboard-check text-violet-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Лифтний магадлан</h3>
+                <p class="text-slate-400">Техникийн магадлан, аюулгүй ажиллагааны шалгалт</p>
+            </div>
+            
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-amber-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-hard-hat text-amber-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Угсралт, суурилуулалт</h3>
+                <p class="text-slate-400">Шинэ лифт угсралт, нийлүүлэлт, суурилуулалт</p>
+            </div>
+            
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-rose-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-calendar-check text-rose-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Сар бүрийн үзлэг</h3>
+                <p class="text-slate-400">Тогтмол оношлогоо, урьдчилан сэргийлэх үйлчилгээ</p>
+            </div>
+            
+            <div class="service-card bg-slate-900 rounded-3xl p-8 border border-slate-800 hover:border-blue-500/30">
+                <div class="w-14 h-14 bg-cyan-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-lightbulb text-cyan-400 text-3xl"></i>
+                </div>
+                <h3 class="font-bold text-2xl mb-3 text-white">Зөвлөмж, зөвлөгөө</h3>
+                <p class="text-slate-400">Лифт сонголт, ашиглалт, засвар үйлчилгээний зөвлөмж</p>
+            </div>
+            
+        </div>
+    </div>
 
-  <section id="about">
-    <h2>Бидний тухай</h2>
-    <p>
-       Бат Ирээдүй Хүч ХХК- нь Улаанбаатар хот болон хөдөө орон нутагт лифт угсралт болон засвар үйлчилгээ, лифт нийлүүлэлтийн чиглэлээр үйл ажиллагаа явуулж байна. Манай засвар үйлчилгээний механикууд, угсралтын баригадууд таны барилгын лифтний угсралт, засвар үйлчилгээг хийхэд хэзээд бэлэн байх болно. Мөн шинээр лифт захиалах бол манай компани урт настай, эдэлгээ сайтай, сайн чанарын лифтыг зах зээлийн үнээс хямд нийлүүлж, угсарч байна. Манай мэргэшсэн лифт захиалгын мэргэжилтэн таньд үйлчилхэд хэзээд бэлэн байна. 
-    </p>
-    <br>
-    <div style="text-align: center;">
-  <img src="ph20.jpg" style="height: 150px; width: 200px;">
-  <img src="ph21.jpg" style="height: 150px; width: 200px;">
-</div>
-  </section>
-  <section id="services">
-  <h2>Манай үйлчилгээ</h2>
-  <ul class="service-list">
-    <li>💠 Лифтний техник үйлчилгээ</li>
-    <li>💠 Лифтний засвар</li>
-    <li>💠 Лифтний магадлан</li>
-    <li>💠 Лифтний угсралт, суурилуулалт, нийлүүлэлт</li>
-    <li>💠 Лифтний сар бүрийн үзлэг, оношлогоо</li>
-    <li>💠 Лифтний зөвлөмж гэх мэтчилэн хамтран ажилладаг.</li>
-  </ul>
-</section>
+    <!-- CTA SECTION -->
+    <div class="max-w-5xl mx-auto px-6 pb-20">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-14 text-center text-white">
+            <h2 class="text-4xl font-black mb-4">Таны лифтэнд асуудал гарсан уу?</h2>
+            <p class="max-w-md mx-auto text-blue-100 mb-8">Манай мэргэжилтнүүд 24/7 бэлэн байна. Шууд холбогдоорой!</p>
+            
+            <a href="holboo.html" 
+               class="inline-flex items-center justify-center gap-x-3 bg-white text-blue-700 hover:bg-blue-50 font-bold px-12 py-4 rounded-3xl text-lg transition-all active:scale-95">
+                <i class="fas fa-phone-alt"></i>
+                <span>Холбоо барих</span>
+            </a>
+        </div>
+    </div>
 
-   <div style="text-align: center;">
-    <p>&copy; Бат Ирээдүй Хүч ХХК.</p>
-</div>
-</main>
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-14 text-center">
+            <div class="flex justify-center mb-6">
+                <div class="flex items-center gap-x-3">
+                    <img src="unnamed.jpg" alt="Logo" class="h-9 w-9 rounded-xl">
+                    <span class="font-black text-2xl text-white">БАТ ИРЭЭДҮЙ ХҮЧ</span>
+                </div>
+            </div>
+            
+            <p class="text-slate-400 text-sm max-w-xs mx-auto">
+                Улаанбаатар хот, Монгол улс<br>
+                Лифтний найдвартай түнш
+            </p>
+            
+            <div class="mt-8 pt-8 border-t border-slate-800 text-xs text-slate-500">
+                &copy; 2026 Бат Ирээдүй Хүч ХХК. Бүх эрх хуулиар хамгаалагдсан.
+            </div>
+        </div>
+    </footer>
 
-<script>
-const menu = document.getElementById('menu');
-const overlay = document.getElementById('overlay');
-
-function openMenu(){
-  menu.classList.add('active');
-  overlay.classList.add('active');
-}
-function closeMenu(){
-  menu.classList.remove('active');
-  overlay.classList.remove('active');
-}
-</script>
-
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#3b82f6');
+        }
+        
+        // Mobile Menu
+        function openMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+        }
+        
+        function closeMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.contains(e.target) && !e.target.closest('button')) {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Initialize
+        window.onload = function() {
+            initializeTailwind();
+            
+            // Optional: Add subtle animation to service cards
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    card.style.transitionDelay = (index * 60) + 'ms';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 300);
+            });
+        }
+        
+        // Keyboard escape for menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    menu.classList.remove('flex');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
