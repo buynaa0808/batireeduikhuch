@@ -1,378 +1,411 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Холбоо барих | Бат Ирээдүй Хүч ХХК</title>
-
-<style>
-:root{
-  --bg-dark:#0f172a;
-  --bg-section:#111827;
-  --primary:#1877f2;
-  --send-green:#42b72a;
-  --text-main:#e5e7eb;
-  --text-soft:#9ca3af;
-  --white:#ffffff;
-  --overlay:rgba(0,0,0,.5);
-}
-
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{
-  background:linear-gradient(180deg,#0f172a,#020617);
-  color:var(--text-main);
-  line-height:1.7;
-}
-
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:linear-gradient(90deg,#ffffffdd,#e5e7ebcc);
-  backdrop-filter:blur(8px);
-  box-shadow:0 6px 20px rgba(0,0,0,.25);
-}
-.topbar{
-  max-width:1200px;
-  margin:auto;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-/* LOGO */
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-}
-.logo img{height:40px;border-radius:6px;}
-.logo span{font-weight:900;color:#1e3a8a;font-size:18px;}
-
-/* NAV */
-nav{
-  display:flex;
-  gap:28px;
-}
-nav a{
-  text-decoration:none;
-  font-weight:600;
-  color:#1e293b;
-  position:relative;
-}
-nav a::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:2px;
-  background:var(--primary);
-  transition:.3s;
-}
-nav a:hover::after{width:100%;}
-
-/* HAMBURGER BUTTON */
-.menu-btn{
-  display:none;
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color: #000;
-}
-
-/* MOBILE MENU */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:var(--overlay);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-}
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-280px;
-  width:260px;
-  height:100%;
-  background:#fff;
-  padding:20px;
-  transition:.3s;
-  z-index:2000;
-}
-.side-menu.active{left:0;}
-.side-menu .close{
-  font-size:22px;
-  cursor:pointer;
-  margin-bottom:30px;
-  display:inline-block;
-  color: #000;
-}
-.side-menu a{
-  display:block;
-  padding:14px 0;
-  color:#1f2937;
-  text-decoration:none;
-  font-size:16px;
-}
-
-/* MAIN */
-main{max-width:1100px;margin:auto;padding:40px 16px;}
-.hero{
-  background:linear-gradient(135deg,#1e3a8a,#2563eb);
-  padding:40px 20px;
-  border-radius:16px;
-  text-align:center;
-  margin-bottom:30px;
-}
-.hero h1{font-size:24px;margin-bottom:12px;}
-.hero p{color:#dbeafe;font-size:16px;max-width:600px;margin:auto;}
-
-/* CONTACT GRID */
-.contact-grid{
-  display:grid;
-  gap:20px;
-}
-@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr;}}
-
-/* CARDS */
-.card{
-  background:var(--bg-section);
-  padding:20px;
-  border-radius:16px;
-  box-shadow:0 15px 30px rgba(0,0,0,.3);
-}
-.card h2{margin-bottom:16px;}
-.info p{
-  margin-bottom:10px;
-  color:var(--text-soft);
-  font-size:15px;
-}
-.socials{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-.socials a{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  color:var(--text-soft);
-  text-decoration:none;
-  font-size:14px;
-}
-.socials a img{width:24px;height:24px;transition:.3s;}
-.socials a:hover img{transform:scale(1.1);}
-
-/* FORM */
-form{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-input, textarea{
-  padding:10px 12px;
-  border-radius:8px;
-  border:none;
-  outline:none;
-  font-size:14px;
-}
-textarea{resize:none;min-height:100px;}
-button{
-  background:var(--send-green);
-  color:white;
-  border:none;
-  padding:12px;
-  border-radius:10px;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.3s;
-}
-/* CHAT BUBBLES */
-.chat{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:16px;
-  max-height:250px;
-  overflow-y:auto;
-  padding-right:8px;
-}
-.bubble{
-  padding:10px 14px;
-  border-radius:18px;
-  max-width:80%;
-  word-wrap:break-word;
-  opacity:0;
-  transform:translateY(15px);
-  animation: appear 0.3s forwards;
-  font-size:14px;
-}
-@keyframes appear{to{opacity:1;transform:translateY(0);}}
-.from-user{background:#e4e6eb;color:#050505;align-self:flex-end;}
-.from-company{background:var(--primary);color:white;align-self:flex-start;}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  margin-top:30px;
-  color:var(--text-soft);
-  font-size:14px;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{display:none;}
-  .menu-btn{display:block;}
-  .contact-grid{grid-template-columns:1fr;gap:16px;}
-  .hero h1{font-size:20px;}
-  .hero p{font-size:14px;}
-  input, textarea, button{font-size:14px;padding:10px;}
-  .chat .bubble{max-width:100%;}
-}
-
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("kbRn8OlDKXyEavQQD"); // Public Key
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Холбоо барих | БАТ ИРЭЭДҮЙ ХҮЧ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .chat-bubble {
+            animation: bubblePop 0.3s ease forwards;
+        }
+        
+        @keyframes bubblePop {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-200">
+    
+    <!-- HEADER -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-x-3 group">
+                    <div class="relative">
+                        <img src="unnamed.jpg" alt="BAT IREEDUI KHUC" 
+                             class="h-12 w-12 object-contain rounded-xl shadow-md group-hover:scale-105 transition-transform">
+                    </div>
+                    <div>
+                        <span class="font-black text-3xl tracking-tighter text-slate-900">БАТ ИРЭЭДҮЙ</span>
+                        <span class="block text-[10px] font-bold text-blue-600 -mt-1 tracking-[3px]">ХҮЧ ХХК</span>
+                    </div>
+                </a>
 
-<!-- HEADER -->
-<header>
-  <div class="topbar">
-    <button class="menu-btn" onclick="openMenu()">☰</button>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-x-9 text-sm font-semibold">
+                    <a href="index.html" class="nav-link text-slate-700 hover:text-blue-600">Бидний тухай</a>
+                    <a href="buteegdhuun.html" class="nav-link text-slate-700 hover:text-blue-600">Бүтээгдэхүүн</a>
+                    <a href="holboo.html" class="nav-link text-blue-600 font-bold">Холбоо барих</a>
+                </nav>
 
-    <a href="index.html" class="logo">
-      <img src="unnamed.jpg" alt="">
-      <span>БАТ ИРЭЭДҮЙ ХҮЧ</span>
-    </a>
+                <!-- Desktop CTA -->
+                <div class="hidden md:block">
+                    <a href="https://wa.me/97695115805" target="_blank"
+                       class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-2xl transition-all flex items-center gap-x-2 shadow-lg shadow-green-500/30">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
 
-    <nav>
-      <a href="index.html">Бидний тухай</a>
-      <a href="buteegdhuun.html">Бүтээгдэхүүн</a>
-      <a href="holboo.html">Холбоо барих</a>
-    </nav>
-  </div>
-</header>
+                <!-- Mobile Burger -->
+                <button onclick="openMenu()" 
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-3xl text-slate-700 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<!-- MOBILE MENU -->
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
-<div class="side-menu" id="menu">
-  <span class="close" onclick="closeMenu()">✕</span>
-  <a href="index.html">Бидний тухай</a>
-  <a href="buteegdhuun.html">Бүтээгдэхүүн</a>
-  <a href="holboo.html">Холбоо барих</a>
-</div>
-
-<!-- MAIN CONTENT -->
-<main>
-
-  <div class="hero">
-    <h1>Холбоо барих</h1>
-    <p>Лифттэй холбоотой бүх асуудалд бид таньд шийдэл өгнө</p>
-  </div>
-
-  <div class="contact-grid">
-
-    <!-- CONTACT INFO -->
-    <div class="card info">
-      <h2>Манай мэдээлэл</h2>
-      <p>Хаяг: Монгол улс, Улаанбаатар хот, Баянгол дүүрэг, 11-р хороо, МҮИС-ын Инновац Технологийн төвийн 10 давхарт 1006 тоот</p>
-      <p>И-мэйл: Batireeduikhuch.elevator@gmail.com</p>
-      <p>Утас: +976 95115805, +976 94253933, +976 90112112</p>
-      <p>WhatsApp: +976 95115805, +976 99338763</p>
-      <p>Viber: +976 88306651, +976 95115805</p>
-      <p>WeChat: +976 88306651, +976 95115805</p>
-      <div class="socials">
-        <a href="https://www.facebook.com/bat.ireed.j.h.c.elevator" target="_blank">
-          <img src="fblogo.png" alt="Facebook">Facebook page
-        </a>
-      </div>
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-[100] hidden">
+        <div onclick="closeMenu()" class="absolute inset-0 bg-black/70"></div>
+        
+        <div onclick="event.stopImmediatePropagation()" 
+             class="absolute top-0 left-0 w-80 h-full bg-white shadow-2xl p-6 flex flex-col">
+            
+            <div class="flex justify-between items-center mb-10">
+                <div class="flex items-center gap-x-3">
+                    <img src="unnamed.jpg" alt="Logo" class="h-10 w-10 rounded-xl">
+                    <span class="font-black text-2xl text-slate-900">БАТ ИРЭЭДҮЙ ХҮЧ</span>
+                </div>
+                <button onclick="closeMenu()" class="text-3xl text-slate-400 hover:text-red-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex flex-col gap-y-1 text-lg font-semibold">
+                <a href="index.html" class="py-4 px-5 rounded-2xl hover:bg-slate-100 text-slate-700 flex items-center gap-x-3">
+                    <i class="fas fa-info-circle w-5"></i> <span>Бидний тухай</span>
+                </a>
+                <a href="buteegdhuun.html" class="py-4 px-5 rounded-2xl hover:bg-slate-100 text-slate-700 flex items-center gap-x-3">
+                    <i class="fas fa-box w-5"></i> <span>Бүтээгдэхүүн</span>
+                </a>
+                <a href="holboo.html" class="py-4 px-5 rounded-2xl bg-blue-50 text-blue-600 flex items-center gap-x-3">
+                    <i class="fas fa-phone w-5"></i> <span>Холбоо барих</span>
+                </a>
+            </div>
+            
+            <div class="mt-auto pt-8 border-t">
+                <a href="https://wa.me/97695115805" target="_blank"
+                   class="w-full flex justify-center items-center gap-x-3 bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-2xl font-bold text-lg shadow-lg">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp-д бичих</span>
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- CONTACT FORM -->
-    <div class="card">
-      <h2>Мессеж илгээх</h2>
-
-      <div class="chat">
-        <div class="bubble from-company">Сайн уу! Танд хэрхэн туслах вэ?</div>
-      </div>
-
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Нэр" required>
-        <input type="tel" name="number" placeholder="Утасны дугаар" required>
-        <input type="email" name="email" placeholder="И-мэйл" required>
-        <textarea name="message" placeholder="Мессежээ бичнэ үү..." required></textarea>
-        <button type="submit">Илгээх</button>
-      </form>
+    <!-- HERO -->
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-x-2 bg-blue-600/10 text-blue-400 text-xs font-bold tracking-[2px] px-5 py-1.5 rounded-full mb-4">
+                <i class="fas fa-headset"></i>
+                <span>24/7 ҮЙЛЧИЛГЭЭ</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-white mb-4">Холбоо барих</h1>
+            <p class="max-w-xl mx-auto text-xl text-slate-400">
+                Лифттэй холбоотой бүх асуудалд бид таньд шийдэл өгнө. Шууд холбогдоорой!
+            </p>
+        </div>
     </div>
 
-  </div>
+    <!-- CONTACT CONTENT -->
+    <div class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="grid lg:grid-cols-5 gap-8">
+            
+            <!-- CONTACT INFO -->
+            <div class="lg:col-span-2">
+                <div class="contact-card bg-slate-900 rounded-3xl p-8 border border-slate-800 h-full">
+                    <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-x-3">
+                        <i class="fas fa-map-marker-alt text-blue-500"></i>
+                        <span>Манай мэдээлэл</span>
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        
+                        <!-- Address -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 bg-blue-600/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Хаяг</div>
+                                <p class="text-slate-400 text-sm mt-1">Улаанбаатар хот, Баянгол дүүрэг, 11-р хороо, МҮИС-ын Инновац Технологийн төвийн 10 давхарт 1006 тоот</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 bg-green-600/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-green-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Утас</div>
+                                <div class="mt-1 space-y-1 text-sm">
+                                    <a href="tel:+97695115805" class="block text-green-400 hover:underline">+976 95115805</a>
+                                    <a href="tel:+97694253933" class="block text-green-400 hover:underline">+976 94253933</a>
+                                    <a href="tel:+97690112112" class="block text-green-400 hover:underline">+976 90112112</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 bg-purple-600/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-purple-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">И-мэйл</div>
+                                <a href="mailto:Batireeduikhuch.elevator@gmail.com" class="text-purple-400 hover:underline text-sm mt-1 block">Batireeduikhuch.elevator@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <!-- WhatsApp & Viber -->
+                        <div class="pt-4 border-t border-slate-800">
+                            <div class="font-semibold text-white mb-3">Шууд холбогдох</div>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://wa.me/97695115805" target="_blank" 
+                                   class="flex items-center gap-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-2xl text-sm font-semibold transition-all">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                
+                                <a href="viber://chat?number=%2B97695115805" target="_blank" 
+                                   class="flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-2xl text-sm font-semibold transition-all">
+                                    <i class="fab fa-viber"></i>
+                                    <span>Viber</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Social -->
+                        <div class="pt-4 border-t border-slate-800">
+                            <a href="https://www.facebook.com/bat.ireed.j.h.c.elevator" target="_blank"
+                               class="inline-flex items-center gap-x-3 text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                                <span class="font-semibold">Facebook Page</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FORM + CHAT -->
+            <div class="lg:col-span-3">
+                <div class="contact-card bg-slate-900 rounded-3xl p-8 border border-slate-800">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-x-3">
+                        <i class="fas fa-paper-plane text-blue-500"></i>
+                        <span>Мессеж илгээх</span>
+                    </h2>
+                    
+                    <!-- Chat simulation -->
+                    <div id="chat" class="bg-slate-950 rounded-2xl p-4 mb-6 max-h-[220px] overflow-y-auto space-y-3 border border-slate-800">
+                        <div class="flex">
+                            <div class="max-w-[80%] bg-blue-600 text-white px-4 py-3 rounded-3xl rounded-bl-none text-sm">
+                                Сайн уу! Танд хэрхэн туслах вэ?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form -->
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Нэр</label>
+                                <input type="text" name="name" required 
+                                       class="form-input w-full bg-slate-800 border border-slate-700 focus:border-blue-500 text-white rounded-2xl px-5 py-3.5 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Утасны дугаар</label>
+                                <input type="tel" name="number" required 
+                                       class="form-input w-full bg-slate-800 border border-slate-700 focus:border-blue-500 text-white rounded-2xl px-5 py-3.5 text-sm outline-none">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5">И-мэйл</label>
+                            <input type="email" name="email" required 
+                                   class="form-input w-full bg-slate-800 border border-slate-700 focus:border-blue-500 text-white rounded-2xl px-5 py-3.5 text-sm outline-none">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Мессеж</label>
+                            <textarea name="message" rows="4" required 
+                                      class="form-input w-full bg-slate-800 border border-slate-700 focus:border-blue-500 text-white rounded-3xl px-5 py-4 text-sm outline-none resize-y min-h-[100px]"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-3xl text-lg transition-all flex items-center justify-center gap-x-3 shadow-lg shadow-blue-500/30">
+                            <span>Мессеж илгээх</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
-</main>
+    <!-- TRUST BAR -->
+    <div class="max-w-5xl mx-auto px-6 pb-16">
+        <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-center text-sm text-slate-500">
+            <div class="flex items-center gap-x-2">
+                <i class="fas fa-shield-alt text-emerald-500"></i>
+                <span>10+ жилийн туршлага</span>
+            </div>
+            <div class="flex items-center gap-x-2">
+                <i class="fas fa-users text-emerald-500"></i>
+                <span>300+ амжилттай төсөл</span>
+            </div>
+            <div class="flex items-center gap-x-2">
+                <i class="fas fa-clock text-emerald-500"></i>
+                <span>24 цагийн дотор хариу</span>
+            </div>
+        </div>
+    </div>
 
-<footer>
-  <p>&copy; 2026 Бат Ирээдүй Хүч ХХК</p>
-</footer>
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 text-center text-sm text-slate-500">
+        © 2026 Бат Ирээдүй Хүч ХХК — Бүх эрх хуулиар хамгаалагдсан
+    </footer>
 
-<script>
-// Hamburger menu functions
-const menu = document.getElementById('menu');
-const overlay = document.getElementById('overlay');
-function openMenu(){
-  menu.classList.add('active');
-  overlay.classList.add('active');
-}
-function closeMenu(){
-  menu.classList.remove('active');
-  overlay.classList.remove('active');
-}
-
-// Contact form submit
-document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const form = this;
-    const chat = document.querySelector('.chat');
-
-    // Bubble нэмэх (user)
-    const userMsg = document.createElement('div');
-    userMsg.classList.add('bubble','from-user');
-    userMsg.innerHTML = `<strong>${form.name.value}</strong><br>
-                         📱 ${form.number.value}<br>
-                         📧 ${form.email.value}<br>
-                         ${form.message.value}`;
-    chat.appendChild(userMsg);
-    chat.scrollTop = chat.scrollHeight;
-
-    // EmailJS-р илгээх
-    emailjs.send("service_64tc257","template_lcvzkuh",{
-        from_name: form.name.value,
-        from_number: form.number.value,
-        from_email: form.email.value,
-        message: form.message.value
-    }).then(()=> {
-        const companyMsg = document.createElement('div');
-        companyMsg.classList.add('bubble','from-company');
-        companyMsg.textContent = 'Бид таны мессежийг хүлээн авлаа. 24 цагийн дотор хариу өгнө.';
-        chat.appendChild(companyMsg);
-        chat.scrollTop = chat.scrollHeight;
-    },(err)=>{alert("Мессеж илгээхэд алдаа гарлаа: " + JSON.stringify(err));});
-
-    form.reset();
-});
-</script>
-
+    <script>
+        // Tailwind + Menu
+        function initializeTailwind() {
+            // already handled by CDN
+        }
+        
+        function openMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+        }
+        
+        function closeMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+        }
+        
+        // EmailJS
+        emailjs.init("kbRn8OlDKXyEavQQD");
+        
+        // Form submit with chat
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const chat = document.getElementById('chat');
+            
+            // User message bubble
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex justify-end';
+            userMsg.innerHTML = `
+                <div class="max-w-[80%] bg-blue-600 text-white px-4 py-3 rounded-3xl rounded-br-none text-sm chat-bubble">
+                    <strong>${form.name.value}</strong><br>
+                    📱 ${form.number.value}<br>
+                    📧 ${form.email.value}<br>
+                    ${form.message.value}
+                </div>
+            `;
+            chat.appendChild(userMsg);
+            chat.scrollTop = chat.scrollHeight;
+            
+            // Send via EmailJS
+            emailjs.send("service_64tc257", "template_lcvzkuh", {
+                from_name: form.name.value,
+                from_number: form.number.value,
+                from_email: form.email.value,
+                message: form.message.value
+            }).then(() => {
+                const companyMsg = document.createElement('div');
+                companyMsg.className = 'flex';
+                companyMsg.innerHTML = `
+                    <div class="max-w-[80%] bg-slate-700 text-white px-4 py-3 rounded-3xl rounded-bl-none text-sm chat-bubble">
+                        Бид таны мессежийг хүлээн авлаа. 24 цагийн дотор хариу өгнө. Баярлалаа!
+                    </div>
+                `;
+                chat.appendChild(companyMsg);
+                chat.scrollTop = chat.scrollHeight;
+                
+                // Success toast
+                showToast();
+            }, (err) => {
+                alert("Мессеж илгээхэд алдаа гарлаа. Утас руу шууд холбогдоорой.");
+            });
+            
+            form.reset();
+        });
+        
+        function showToast() {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 text-sm font-semibold z-[999]';
+            toast.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>Мессеж амжилттай илгээгдлээ!</span>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s ease';
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, 20px)';
+                setTimeout(() => toast.remove(), 400);
+            }, 2800);
+        }
+        
+        // Keyboard escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    menu.classList.remove('flex');
+                }
+            }
+        });
+        
+        window.onload = function() {
+            initializeTailwind();
+        }
+    </script>
 </body>
 </html>
-
